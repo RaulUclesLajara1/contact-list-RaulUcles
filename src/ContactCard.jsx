@@ -33,7 +33,7 @@ const ContactCard = ({ id, nombre, direccion, telefono, email, eliminar }) => {
             <button className="btn btn-secondary btn-sm me-2">
               <i className="fa-solid fa-pen"></i>
             </button>
-            <button className="btn btn-danger btn-sm" onClick={eliminar(id)}>
+            <button className="btn btn-danger btn-sm" onClick={()=>eliminar(id)}>
               <i className="fa-solid fa-trash"></i>
             </button>
           </div>

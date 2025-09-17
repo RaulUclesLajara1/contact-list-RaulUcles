@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import ContactCard from "./ContactCard"
+import { Link } from "react-router-dom"
 
 const VistaContactos = () => {
     const [contactos,setContactos] = useState([])
@@ -29,8 +30,17 @@ const VistaContactos = () => {
         
     }
 
+
     return(
         <>
+            <div className="container">
+                <div className="row mb-3">
+                    <div className="col-md-12 pt-4 d-flex justify-content-end">
+                        <Link to="/AgregarContacto"><button className="btn btn-success">Añadir contacto</button></Link>
+                    </div>
+                </div>
+            </div>
+
             {contactos.map((element, index) => (
             <ContactCard
                 id = {element.id}
