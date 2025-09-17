@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const ContactCard = ({ id, nombre, direccion, telefono, email, eliminar }) => {
 
   return (
@@ -30,9 +32,10 @@ const ContactCard = ({ id, nombre, direccion, telefono, email, eliminar }) => {
 
           
           <div className="ms-3">
-            <button className="btn btn-secondary btn-sm me-2">
+            <Link to={`AgregarContacto/${id}`}>
+              <button className="btn btn-secondary btn-sm me-2">
               <i className="fa-solid fa-pen"></i>
-            </button>
+            </button></Link>
             <button className="btn btn-danger btn-sm" onClick={()=>eliminar(id)}>
               <i className="fa-solid fa-trash"></i>
             </button>

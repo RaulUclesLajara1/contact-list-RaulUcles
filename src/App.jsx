@@ -10,7 +10,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<VistaContactos/>} path="/"/>
+          <Route element={<AgregarContacto/>} path="/AgregarContacto/:id"/>
           <Route element={<AgregarContacto/>} path="/AgregarContacto"/>
+
         </Routes>
       </BrowserRouter>
     </>

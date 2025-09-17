@@ -27,8 +27,10 @@ const VistaContactos = () => {
                 console.log("Error")
             }
         })
-        
     }
+ 
+    
+    
 
 
     return(
@@ -50,6 +52,7 @@ const VistaContactos = () => {
                 email={element.email}
                 direccion={element.address}
                 eliminar={EliminarContacto}
+
             />
 ))}
         

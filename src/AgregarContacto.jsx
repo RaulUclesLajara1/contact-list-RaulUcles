@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { useState } from "react"
 const AgregarContacto = () => {
         const [formData, setFormData] = useState({
@@ -13,7 +13,10 @@ const AgregarContacto = () => {
         ...prev,
         [id.toLowerCase()]: value 
     }))
+
   }
+  
+  const {id} = useParams()
     return(
         <>
         <form>
@@ -39,7 +42,24 @@ const AgregarContacto = () => {
                     <button 
                         type="button" 
                         className="btn btn-success me-3"
-                        onClick={() => {
+                        onClick={id? () => {
+                            fetch(`https://playground.4geeks.com/contact/agendas/rauulucless/contacts/${id}`, {
+                             method:"PUT",
+                             headers: { "Content-Type": "application/json" },
+                             body: JSON.stringify({
+                                 name: formData.nombre,
+                                 email: formData.email,
+                                 phone: formData.telefono,
+                                 address: formData.direccion
+                             })
+                            })
+                            .then(resp => resp.ok 
+                                ? alert("Contacto editado")
+                                : alert("Error")
+                            )
+                            .catch(err => console.error(err))
+                            
+                        }:() => {
                             fetch("https://playground.4geeks.com/contact/agendas/rauulucless/contacts", {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
@@ -53,10 +73,10 @@ const AgregarContacto = () => {
                             .then(resp => resp.ok 
                                 ? alert("Contacto añadido") 
                                 : alert("Error"))
-                            .catch(err => console.error(err))
-                        }}
+                            .catch(err => console.error(err))}
+                    }
                         >
-                        Añadir
+                        {id ? "Editar" : "Añadir"} 
                         </button>
                     <Link to="/"><button className="btn btn-secondary">Volver a la vista principal</button></Link>
 
