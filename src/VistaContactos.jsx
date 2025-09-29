@@ -1,14 +1,17 @@
-import { useEffect, useState } from "react"
+import { useEffect} from "react"
 import ContactCard from "./ContactCard"
 import { Link } from "react-router-dom"
+import useGlobalReducer from "./Contexto"
+
+
 
 const VistaContactos = () => {
-    const [contactos,setContactos] = useState([])
+    const {store , dispatch} = useGlobalReducer();
     useEffect(()=>{
         fetch("https://playground.4geeks.com/contact/agendas/rauulucless")
         .then(resp => resp.json())
         .then(data => 
-            setContactos(data.contacts)    
+            dispatch({type: 'Cargar', payload: data.contacts})    
         )
 
     },[]
@@ -21,7 +24,7 @@ const VistaContactos = () => {
             })
         .then(resp=>{
             if (resp.ok){
-            setContactos(prev => prev.filter(contacto => contacto.id !== id))
+                dispatch({type:'Eliminar', payload: id})
             }
             else {
                 console.log("Error")
@@ -43,7 +46,7 @@ const VistaContactos = () => {
                 </div>
             </div>
 
-            {contactos.map((element, index) => (
+            {store.contactos.map((element, index) => (
             <ContactCard
                 id = {element.id}
                 key={index}
